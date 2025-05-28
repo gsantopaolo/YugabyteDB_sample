@@ -1,6 +1,8 @@
 # YugabyteDB Docker + Python Demo 🚀
 
-Welcome to the **YugabyteDB Docker + Python Demo**! This project demonstrates how to spin up a local YugabyteDB cluster using Docker Compose and build a simple Python application that exercises both the PostgreSQL-compatible (YSQL) and Cassandra-compatible (YCQL) APIs. 😎
+Welcome to the **YugabyteDB Docker + Python Demo**! This project demonstrates how to spin up a local 
+YugabyteDB cluster using Docker Compose and build a simple Python application that exercises both 
+the PostgreSQL-compatible (YSQL) and Cassandra-compatible (YCQL) APIs. 😎
 
 ---
 

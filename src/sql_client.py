@@ -8,11 +8,11 @@ from psycopg2.extras import RealDictCursor
 class SQLClient:
     def __init__(self):
         self.conn = psycopg2.connect(
-            host=os.getenv('YB_HOST', '127.0.0.1'),
+            host=os.getenv('YB_HOST', 'localhost'),
             port=int(os.getenv('YB_YSQl_PORT', 5433)),
-            user=os.getenv('YB_USER', 'genmind'),
-            password=os.getenv('YB_PASSWORD', 'genmind'),
-            dbname=os.getenv('YB_DB', 'genmind_db')
+            user=os.getenv('YB_USER', 'yugabyte'),
+            password=os.getenv('YB_PASSWORD', 'yugabyte'),
+            dbname=os.getenv('YB_DB', 'yugabyte')
         )
         self.conn.autocommit = True
 
