@@ -1,0 +1,61 @@
+
+networks:
+  yugabyte_net:
+    name: yugabyte_net
+#    external: true
+#    driver: bridge
+# it needs the network to be created before using it
+# docker network create yugabyte_net
+
+services:
+
+  yugabytedb:
+    container_name: yugabytedb
+    image: yugabytedb/yugabyte:2024.1.0.0-b129
+    ports:
+      - "7000:7000"
+      - "9000:9000"
+      - "15433:15433"
+      - "5433:5433"
+      - "9042:9042"
+    command: yugabyted start --enable_pg_parity_early_access --background=false
+    environment:
+      - POSTGRES_USER=genmind
+      - POSTGRES_PASSWORD=genmind
+      - POSTGRES_DB=genmind_db
+    volumes:
+      - "../data/yugabytedb:/root/var/data"
+    healthcheck:
+      test: postgres/bin/pg_isready -h yugabytedb -p 5433
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    networks:
+      - yugabyte_net
+#  yugabyte:
+#    image: yugabytedb/yugabyte:latest
+#    container_name: yugabyte
+##    ports:
+##      - "7000:7000"
+##      - "9000:9000"
+##      - "15433:15433"
+##      - "5433:5433"
+##      - "9042:9042"
+##    command: yugabyted start --enable_pg_parity_early_access --background=false --advertise_address=0.0.0.0
+#    command: >
+#      yugabyted start
+#        --advertise_address=0.0.0.0
+#        --background=false
+#    volumes:
+#      - "../data/yugabytedb:/root/var/data"
+#
+#    networks:
+#      - yugabyte_net
+
+volumes:
+  yugabyte_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/gp/Developer/samples/YugabyteDB_sample/data/yugabyte-data
