@@ -17,12 +17,10 @@ services:
       "/home/yugabyte/bin/yugabyted",
       "start",
       "--base_dir=/home/yugabyte/yb_data",
-      "--background=false",
-      "--tserver_flags=--rocksdb_use_fallocate=false",
-      "--tserver_flags=--allow_fallocate=false"
+      "--background=false"
     ]
     volumes:
-      - "../data/yugabytedb/single-node:/home/yugabyte/yb_data"
+      - "../data/yugabytedb/node3:/root/var/data"
 #     - "../data/yugabytedb/single-node:/home/yugabyte/yb_data"
     restart: unless-stopped
     environment:
