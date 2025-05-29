@@ -1,0 +1,41 @@
+networks:
+  yugabyte_net:
+    name: yugabyte_net
+
+services:
+  yugabytedb:
+    container_name: yugabytedb
+#    image: yugabytedb/yugabyte:2024.1.0.0-b129
+    image: yugabytedb/yugabyte:latest
+    ports:
+      - "7000:7000"
+      - "9000:9000"
+      - "15433:15433"
+      - "5433:5433"
+      - "9042:9042"
+    command: [
+      "/home/yugabyte/bin/yugabyted",
+      "start",
+      "--base_dir=/home/yugabyte/yb_data",
+      "--background=false",
+      "--tserver_flags=--rocksdb_use_fallocate=false",
+      "--tserver_flags=--allow_fallocate=false"
+    ]
+    volumes:
+      - "../data/yugabytedb/single-node:/home/yugabyte/yb_data"
+#     - "../data/yugabytedb/single-node:/home/yugabyte/yb_data"
+    restart: unless-stopped
+    environment:
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en # Or just en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+    healthcheck:
+      # test: postgres/bin/pg_isready -h yugabytedb -p 5433 # Original
+      test: ["CMD-SHELL", "/home/yugabyte/postgres/bin/pg_isready -h yugabytedb -p 5433 -U yugabyte || exit 1"]
+      interval: 20s
+      timeout: 10s # Increased timeout slightly
+      retries: 5
+      start_period: 30s # Give it some time to initialize before first healthcheck
+    networks:
+      - yugabyte_net
+

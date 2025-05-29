@@ -9,6 +9,7 @@ class SQLClient:
     def __init__(self):
         self.conn = psycopg2.connect(
             host=os.getenv('YB_HOST', 'localhost'),
+            # host=os.getenv('YB_HOST', '127.0.0.1'),
             port=int(os.getenv('YB_YSQl_PORT', 5433)),
             user=os.getenv('YB_USER', 'yugabyte'),
             password=os.getenv('YB_PASSWORD', 'yugabyte'),

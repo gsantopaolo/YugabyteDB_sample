@@ -1,0 +1,102 @@
+networks:
+  yugabyte_net:
+    name: yugabyte_net
+
+services:
+  yugabytedb_node1:
+    container_name: yugabytedb-node1
+    hostname: yugabytedb-node1
+    image: yugabytedb/yugabyte:2024.1.0.0-b129
+    ports:
+      - "7000:7000"
+      - "9000:9000"
+      - "15433:15433"
+      - "5433:5433"
+      - "9042:9042"
+    command: [
+      "/home/yugabyte/bin/yugabyted",
+      "start",
+      "--base_dir=/home/yugabyte/yb_data",
+      "--background=false",
+      "--master_flags=minloglevel=0,v=3",
+      "--tserver_flags=minloglevel=0,v=3"
+    ]
+    volumes:
+      - "../data/yugabytedb/node3:/root/var/data"
+#      - "../data/yugabytedb/node1/home/yugabyte/yb_data"
+    restart: unless-stopped
+    healthcheck:
+      test: postgres/bin/pg_isready -h yugabytedb-node1 -p 5433
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    networks:
+      - yugabyte_net
+
+
+  yugabytedb_node2:
+    container_name: yugabytedb-node2
+    image: yugabytedb/yugabyte:2024.1.0.0-b129
+    ports:
+      - "7002:7000"
+      - "9002:9000"
+      - "15434:15433"
+      - "5434:5433"
+      - "9043:9042"
+    command: [
+      "/home/yugabyte/bin/yugabyted",
+      "start",
+      "--base_dir=/home/yugabyte/yb_data",
+      "--background=false",
+      "--join=yugabytedb-node1",
+      "--master_flags=minloglevel=0",
+      "--tserver_flags=minloglevel=0"
+    ]
+    volumes:
+      - "../data/yugabytedb/node3:/root/var/data"
+#      - "../data/yugabytedb/node2/home/yugabyte/yb_data"
+    restart: unless-stopped
+    healthcheck:
+      test: postgres/bin/pg_isready -h yugabytedb-node2 -p 5433
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      yugabytedb_node1:
+        condition: service_healthy
+    networks:
+      - yugabyte_net
+
+
+  yugabytedb_node3:
+    container_name: yugabytedb-node3
+    image: yugabytedb/yugabyte:2024.1.0.0-b129
+    ports:
+      - "7003:7000"
+      - "9003:9000"
+      - "15435:15433"
+      - "5435:5433"
+      - "9045:9042"
+    command: [
+      "/home/yugabyte/bin/yugabyted",
+      "start",
+      "--base_dir=/home/yugabyte/yb_data",
+      "--background=false",
+      "--join=yugabytedb-node1",
+      "--master_flags=minloglevel=0",
+      "--tserver_flags=minloglevel=0"
+    ]
+    volumes:
+      - "../data/yugabytedb/node3:/root/var/data"
+#      - "../data/yugabytedb/node2/home/yugabyte/yb_data"
+    restart: unless-stopped
+    healthcheck:
+      test: postgres/bin/pg_isready -h yugabytedb-node3 -p 5433
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      yugabytedb_node1:
+        condition: service_healthy
+    networks:
+      - yugabyte_net
