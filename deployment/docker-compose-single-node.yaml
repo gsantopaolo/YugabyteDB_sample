@@ -2,13 +2,29 @@ networks:
   yugabyte_net:
     name: yugabyte_net
 
+volumes:
+  yugabytedb-data:
+
+x-logging:
+  &default-logging
+  options:
+    max-size: '20m'
+    max-file: '3'
+  driver: json-file
+
 services:
   yugabytedb:
     container_name: yugabytedb
-#    image: yugabytedb/yugabyte:2024.1.0.0-b129
-    image: yugabytedb/yugabyte:latest
+    image: yugabytedb/yugabyte:2024.1.0.0-b129
+    init: true
+    environment:
+      - TINI_SUBREAPER=true
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en # Or just en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+#    logging: *default-logging
     ports:
-      - "7000:7000"
+      - "7001:7000"
       - "9000:9000"
       - "15433:15433"
       - "5433:5433"
@@ -20,20 +36,16 @@ services:
       "--background=false"
     ]
     volumes:
-      - "../data/yugabytedb/node3:/root/var/data"
+      - yugabytedb-data:/home/yugabyte/yb_data
+#      - "../data/yugabytedb/single-node:/root/var/data" #using a wrong path make the container at least to start
 #     - "../data/yugabytedb/single-node:/home/yugabyte/yb_data"
     restart: unless-stopped
-    environment:
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_US:en # Or just en_US.UTF-8
-      - LC_ALL=en_US.UTF-8
     healthcheck:
-      # test: postgres/bin/pg_isready -h yugabytedb -p 5433 # Original
       test: ["CMD-SHELL", "/home/yugabyte/postgres/bin/pg_isready -h yugabytedb -p 5433 -U yugabyte || exit 1"]
       interval: 20s
-      timeout: 10s # Increased timeout slightly
+      timeout: 5s
       retries: 5
-      start_period: 30s # Give it some time to initialize before first healthcheck
+      start_period: 10s
     networks:
       - yugabyte_net
 

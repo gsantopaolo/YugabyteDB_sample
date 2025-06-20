@@ -1,14 +1,33 @@
 networks:
-  yugabyte_net:
-    name: yugabyte_net
+  yugabyte_net_multi:
+    name: yugabyte_net_multi
+
+volumes:
+  yugabytedb-data1:
+  yugabytedb-data2:
+  yugabytedb-data3:
+
+x-logging:
+  &default-logging
+  options:
+    max-size: '20m'
+    max-file: '3'
+  driver: json-file
 
 services:
   yugabytedb_node1:
     container_name: yugabytedb-node1
     hostname: yugabytedb-node1
     image: yugabytedb/yugabyte:2024.1.0.0-b129
+    init: true
+    environment:
+      - TINI_SUBREAPER=true
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en # Or just en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+  #    logging: *default-logging
     ports:
-      - "7000:7000"
+      - "7001:7000"
       - "9000:9000"
       - "15433:15433"
       - "5433:5433"
@@ -22,21 +41,27 @@ services:
       "--tserver_flags=minloglevel=0,v=3"
     ]
     volumes:
-      - "../data/yugabytedb/node3:/root/var/data"
-#      - "../data/yugabytedb/node1/home/yugabyte/yb_data"
+      - yugabytedb-data1:/home/yugabyte/yb_data
     restart: unless-stopped
     healthcheck:
-      test: postgres/bin/pg_isready -h yugabytedb-node1 -p 5433
+      test: postgres/bin/pg_isready -h yugabytedb_node1 -p 5433
       interval: 20s
       timeout: 5s
       retries: 5
+      start_period: 10s
     networks:
-      - yugabyte_net
-
+      - yugabyte_net_multi
 
   yugabytedb_node2:
     container_name: yugabytedb-node2
     image: yugabytedb/yugabyte:2024.1.0.0-b129
+    init: true
+    environment:
+      - TINI_SUBREAPER=true
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en # Or just en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+  #    logging: *default-logging
     ports:
       - "7002:7000"
       - "9002:9000"
@@ -53,24 +78,31 @@ services:
       "--tserver_flags=minloglevel=0"
     ]
     volumes:
-      - "../data/yugabytedb/node3:/root/var/data"
-#      - "../data/yugabytedb/node2/home/yugabyte/yb_data"
+      - yugabytedb-data2:/home/yugabyte/yb_data
     restart: unless-stopped
     healthcheck:
-      test: postgres/bin/pg_isready -h yugabytedb-node2 -p 5433
+      test: postgres/bin/pg_isready -h yugabytedb_node2 -p 5433
       interval: 20s
       timeout: 5s
       retries: 5
+      start_period: 10s
     depends_on:
       yugabytedb_node1:
-        condition: service_healthy
+        condition: service_started
     networks:
-      - yugabyte_net
+      - yugabyte_net_multi
 
 
   yugabytedb_node3:
     container_name: yugabytedb-node3
     image: yugabytedb/yugabyte:2024.1.0.0-b129
+    init: true
+    environment:
+      - TINI_SUBREAPER=true
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en # Or just en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+  #    logging: *default-logging
     ports:
       - "7003:7000"
       - "9003:9000"
@@ -87,16 +119,16 @@ services:
       "--tserver_flags=minloglevel=0"
     ]
     volumes:
-      - "../data/yugabytedb/node3:/root/var/data"
-#      - "../data/yugabytedb/node2/home/yugabyte/yb_data"
+      - yugabytedb-data3:/home/yugabyte/yb_data
     restart: unless-stopped
     healthcheck:
-      test: postgres/bin/pg_isready -h yugabytedb-node3 -p 5433
+      test: postgres/bin/pg_isready -h yugabytedb_node3 -p 5433
       interval: 20s
       timeout: 5s
       retries: 5
+      start_period: 10s
     depends_on:
       yugabytedb_node1:
-        condition: service_healthy
+        condition: service_started
     networks:
-      - yugabyte_net
+      - yugabyte_net_multi

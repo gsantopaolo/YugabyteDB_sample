@@ -1,0 +1,1178 @@
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:08:23,142 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:08:23,143 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:08:23,143 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:08:23,143 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:08:23,143 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:08:23,144 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:08:23,144 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:08:23,144 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:08:23,144 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:08:23,144 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:08:23,163 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:08:23,163 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:08:23,164 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:08:23,165 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:08:23,165 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:08:33,174 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:08:33,678 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:08:33,681 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:08:33,682 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:08:34,286 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:08:34,286 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:08:34,286 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:08:34,286 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:08:34,286 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:08:34,286 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:08:34,287 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:08:34,287 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:08:34,287 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:08:34,288 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:08:34,288 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:08:34,288 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:08:34,288 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:08:34,288 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:08:34,288 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:08:34,288 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:08:34,305 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:08:34,305 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:08:34,307 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:08:34,307 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:08:34,307 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:08:34,308 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:08:44,309 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:08:44,814 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:08:44,817 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:08:44,817 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:08:45,357 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:08:45,358 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:08:45,358 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:08:45,358 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:08:45,358 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:08:45,358 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:08:45,358 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:08:45,358 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:08:45,359 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:08:45,359 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:08:45,375 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:08:45,375 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:08:45,376 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:08:45,377 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:08:45,377 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:08:45,377 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:08:55,388 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:08:55,892 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:08:55,896 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:08:55,896 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:08:56,471 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:08:56,471 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:08:56,471 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:08:56,471 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:08:56,471 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:08:56,471 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:08:56,472 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:08:56,472 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:08:56,472 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:08:56,472 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:08:56,472 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:08:56,473 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:08:56,473 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:08:56,473 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:08:56,473 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:08:56,473 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:08:56,489 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:08:56,489 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:08:56,490 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:08:56,491 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:08:56,491 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:08:56,491 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:09:06,502 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:09:07,010 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:09:07,014 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:09:07,014 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:09:07,614 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:09:07,614 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:09:07,614 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:09:07,615 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:09:07,616 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:09:07,616 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:09:07,616 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:09:07,616 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:09:07,616 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:09:07,616 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:09:07,632 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:09:07,632 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:09:07,634 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:09:07,634 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:09:07,634 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:09:07,634 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:09:17,647 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:09:18,151 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:09:18,153 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:09:18,153 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:09:18,660 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:09:18,661 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:09:18,661 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:09:18,661 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:09:18,661 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:09:18,661 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:09:18,661 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:09:18,661 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:09:18,661 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:09:18,677 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:09:18,677 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:09:18,679 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:09:18,680 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:09:18,680 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:09:18,680 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:09:28,681 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:09:29,186 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:09:29,190 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:09:29,190 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:09:29,795 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:09:29,795 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:09:29,795 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:09:29,796 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:09:29,796 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:09:29,796 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:09:29,796 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:09:29,796 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:09:29,797 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:09:29,797 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:09:29,797 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:09:29,797 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:09:29,797 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:09:29,797 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:09:29,797 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:09:29,797 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:09:29,813 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:09:29,813 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:09:29,814 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:09:29,815 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:09:29,815 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:09:29,815 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:09:39,816 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:09:40,320 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:09:40,325 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:09:40,325 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:09:40,956 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:09:40,956 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:09:40,956 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:09:40,956 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:09:40,957 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:09:40,957 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:09:40,957 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:09:40,957 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:09:40,957 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:09:40,958 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:09:40,958 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:09:40,958 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:09:40,958 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:09:40,958 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:09:40,958 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:09:40,959 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:09:40,975 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:09:40,975 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:09:40,977 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:09:40,977 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:09:40,977 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:09:40,978 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:09:50,989 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:09:51,497 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:09:51,500 ERROR:  | 10.6s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:09:51,501 INFO:  | 10.6s | Shutting down...
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:09:52,062 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:09:52,063 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:09:52,063 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:09:52,064 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:09:52,064 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:09:52,064 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:09:52,064 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:09:52,064 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:09:52,065 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:09:52,065 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:09:52,082 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:09:52,082 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:09:52,084 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:09:52,084 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:09:52,084 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:09:52,085 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:10:02,090 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:10:02,597 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:10:02,601 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:10:02,601 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:10:03,195 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:10:03,195 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:10:03,195 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:10:03,195 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:10:03,196 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:10:03,196 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:10:03,196 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:10:03,196 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:10:03,197 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:10:03,197 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:10:03,197 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:10:03,197 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:10:03,197 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:10:03,197 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:10:03,197 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:10:03,198 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:10:03,214 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:10:03,214 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:10:03,215 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:10:03,216 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:10:03,216 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:10:03,216 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:10:13,218 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:10:13,727 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:10:13,731 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:10:13,731 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:10:14,332 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:10:14,333 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:10:14,333 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:10:14,334 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:10:14,334 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:10:14,334 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:10:14,334 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:10:14,334 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:10:14,334 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:10:14,335 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:10:14,350 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:10:14,350 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:10:14,352 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:10:14,352 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:10:14,352 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:10:14,353 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:10:24,354 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:10:24,862 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:10:24,865 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:10:24,866 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:10:25,430 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:10:25,431 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:10:25,431 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:10:25,431 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:10:25,431 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:10:25,432 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:10:25,432 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:10:25,432 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:10:25,432 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:10:25,432 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:10:25,448 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:10:25,448 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:10:25,450 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:10:25,450 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:10:25,450 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:10:25,451 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:10:35,453 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:10:35,960 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:10:35,964 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:10:35,965 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:10:36,533 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:10:36,534 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:10:36,534 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:10:36,534 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:10:36,534 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:10:36,534 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:10:36,534 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:10:36,535 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:10:36,535 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:10:36,535 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:10:36,551 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:10:36,551 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:10:36,553 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:10:36,553 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:10:36,553 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:10:36,554 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:10:46,555 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:10:47,062 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:10:47,065 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:10:47,066 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:10:47,613 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:10:47,614 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:10:47,614 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:10:47,614 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:10:47,614 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:10:47,615 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:10:47,615 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:10:47,615 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:10:47,615 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:10:47,615 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:10:47,631 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:10:47,631 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:10:47,633 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:10:47,634 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:10:47,634 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:10:47,634 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:10:57,646 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:10:58,152 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:10:58,157 ERROR:  | 10.6s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:10:58,157 INFO:  | 10.6s | Shutting down...
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:10:58,715 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:10:58,716 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:10:58,716 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:10:58,716 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:10:58,716 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:10:58,717 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:10:58,717 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:10:58,717 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:10:58,717 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:10:58,717 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:10:58,733 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:10:58,733 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:10:58,734 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:10:58,735 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:10:58,735 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:10:58,735 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:11:08,739 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:11:09,247 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:11:09,250 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:11:09,250 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:11:09,808 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:11:09,808 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:11:09,808 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:11:09,808 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:11:09,809 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:11:09,809 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:11:09,809 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:11:09,809 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:11:09,809 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:11:09,810 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:11:09,810 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:11:09,810 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:11:09,810 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:11:09,810 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:11:09,810 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:11:09,810 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:11:09,827 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:11:09,827 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:11:09,829 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:11:09,829 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:11:09,829 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:11:09,829 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:11:19,831 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:11:20,338 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:11:20,342 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:11:20,343 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:11:20,846 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:11:20,847 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:11:20,847 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:11:20,847 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:11:20,847 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:11:20,847 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:11:20,847 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:11:20,848 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:11:20,848 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:11:20,848 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:11:20,864 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:11:20,864 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:11:20,865 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:11:20,866 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:11:20,866 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:11:20,866 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:11:30,876 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:11:31,380 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:11:31,383 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:11:31,384 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:11:31,977 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:11:31,977 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:11:31,977 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:11:31,977 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:11:31,977 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:11:31,977 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:11:31,978 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:11:31,978 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:11:31,978 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:11:31,978 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:11:31,979 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:11:31,979 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:11:31,979 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:11:31,979 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:11:31,979 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:11:31,979 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:11:31,995 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:11:31,995 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:11:31,997 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:11:31,997 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:11:31,997 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:11:31,997 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:11:42,010 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:11:42,514 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:11:42,518 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:11:42,519 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:11:43,128 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:11:43,128 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:11:43,128 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:11:43,128 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:11:43,128 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:11:43,129 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:11:43,129 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:11:43,129 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:11:43,129 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:11:43,130 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:11:43,130 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:11:43,130 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:11:43,130 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:11:43,130 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:11:43,130 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:11:43,131 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:11:43,146 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:11:43,147 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:11:43,148 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:11:43,149 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:11:43,149 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:11:43,149 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:11:53,151 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:11:53,658 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:11:53,661 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:11:53,661 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:11:54,203 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:11:54,204 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:11:54,204 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:11:54,204 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:11:54,204 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:11:54,205 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:11:54,205 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:11:54,205 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:11:54,205 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:11:54,205 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:11:54,221 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:11:54,221 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:11:54,223 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:11:54,223 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:11:54,224 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:11:54,224 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:12:04,236 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:12:04,742 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:12:04,744 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:12:04,744 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:12:05,318 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:12:05,319 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:12:05,319 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:12:05,319 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:12:05,319 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:12:05,319 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:12:05,319 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:12:05,319 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:12:05,320 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:12:05,320 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:12:05,335 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:12:05,336 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:12:05,337 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:12:05,337 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:12:05,337 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:12:05,338 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:12:15,342 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:12:15,846 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:12:15,850 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:12:15,850 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:12:16,446 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:12:16,447 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:12:16,447 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:12:16,447 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:12:16,448 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:12:16,448 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:12:16,448 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:12:16,448 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:12:16,448 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:12:16,448 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:12:16,465 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:12:16,465 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:12:16,467 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:12:16,468 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:12:16,468 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:12:16,468 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:12:26,477 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:12:26,983 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:12:26,987 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:12:26,987 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:12:27,598 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:12:27,599 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:12:27,599 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:12:27,599 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:12:27,599 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:12:27,600 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:12:27,600 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:12:27,600 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:12:27,600 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:12:27,600 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:12:27,616 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:12:27,616 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:12:27,617 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:12:27,618 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:12:27,618 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:12:27,618 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:12:37,620 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:12:38,131 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:12:38,134 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:12:38,135 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:12:38,688 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:12:38,689 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:12:38,689 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:12:38,689 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:12:38,689 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:12:38,689 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:12:38,689 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:12:38,690 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:12:38,690 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:12:38,690 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:12:38,707 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:12:38,707 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:12:38,709 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:12:38,709 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:12:38,709 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:12:38,709 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:12:48,711 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:12:49,218 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:12:49,221 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:12:49,221 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:12:49,835 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:12:49,836 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:12:49,836 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:12:49,836 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:12:49,837 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:12:49,837 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:12:49,837 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:12:49,837 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:12:49,837 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:12:49,837 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:12:49,853 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:12:49,854 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:12:49,855 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:12:49,856 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:12:49,856 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:12:49,856 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:12:59,863 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:13:00,366 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:13:00,370 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:13:00,370 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:13:00,971 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:13:00,972 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:13:00,972 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:13:00,973 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:13:00,973 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:13:00,973 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:13:00,973 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:13:00,973 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:13:00,973 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:13:00,974 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:13:00,990 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:13:00,990 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:13:00,991 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:13:00,992 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:13:00,992 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:13:00,992 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:13:10,998 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:13:11,507 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:13:11,511 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:13:11,511 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:13:12,113 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:13:12,113 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:13:12,114 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:13:12,114 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:13:12,114 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:13:12,114 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:13:12,114 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:13:12,114 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:13:12,115 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:13:12,115 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:13:12,115 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:13:12,115 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:13:12,115 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:13:12,115 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:13:12,116 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:13:12,116 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:13:12,132 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:13:12,132 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:13:12,134 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:13:12,134 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:13:12,134 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:13:12,134 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:13:22,136 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:13:22,643 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:13:22,647 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:13:22,648 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:13:23,230 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:13:23,231 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:13:23,231 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:13:23,232 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:13:23,232 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:13:23,232 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:13:23,232 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:13:23,232 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:13:23,233 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:13:23,234 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:13:23,253 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:13:23,254 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:13:23,258 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:13:23,260 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:13:23,260 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:13:23,261 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:13:33,262 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:13:33,769 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:13:33,773 ERROR:  | 10.6s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:13:33,773 INFO:  | 10.6s | Shutting down...
+[yugabyted start] 2025-06-19 16:13:34,338 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:13:34,339 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:13:34,339 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:13:34,339 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:13:34,339 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:13:34,339 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:13:34,339 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:13:34,340 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:13:34,340 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:13:34,340 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:13:34,340 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:13:34,341 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:13:34,341 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:13:34,341 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:13:34,341 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:13:34,341 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:13:34,357 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:13:34,358 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:13:34,359 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:13:34,360 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:13:34,360 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:13:34,360 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:13:44,371 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:13:44,881 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:13:44,884 ERROR:  | 10.6s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:13:44,884 INFO:  | 10.6s | Shutting down...
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:13:45,406 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:13:45,407 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:13:45,407 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:13:45,407 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:13:45,407 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:13:45,407 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:13:45,407 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:13:45,407 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:13:45,408 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:13:45,408 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:13:45,424 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:13:45,424 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:13:45,426 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:13:45,426 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:13:45,426 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:13:45,427 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:13:55,438 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:13:55,944 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:13:55,947 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:13:55,948 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:13:56,509 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:13:56,509 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:13:56,509 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:13:56,509 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:13:56,510 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:13:56,510 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:13:56,510 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:13:56,510 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:13:56,510 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:13:56,511 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:13:56,511 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:13:56,511 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:13:56,511 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:13:56,511 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:13:56,511 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:13:56,511 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:13:56,527 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:13:56,527 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:13:56,529 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:13:56,529 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:13:56,529 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:13:56,529 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:14:06,540 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:14:07,044 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:14:07,047 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:14:07,048 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:14:07,599 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:14:07,599 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:14:07,600 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:14:07,600 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:14:07,600 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:14:07,600 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:14:07,600 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:14:07,600 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:14:07,601 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:14:07,601 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:14:07,601 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:14:07,601 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:14:07,601 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:14:07,601 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:14:07,602 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:14:07,602 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:14:07,617 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:14:07,617 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:14:07,619 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:14:07,619 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:14:07,619 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:14:07,620 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:14:17,627 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:14:18,131 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:14:18,136 ERROR:  | 10.5s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:14:18,137 INFO:  | 10.5s | Shutting down...
+[yugabyted start] 2025-06-19 16:14:18,698 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:14:18,698 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:14:18,699 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:14:18,699 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:14:18,699 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:14:18,699 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:14:18,699 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:14:18,700 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:14:18,700 INFO:  | 0.0s | yugabyted started running with PID 6.
+[yugabyted start] 2025-06-19 16:14:18,700 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:14:18,700 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:14:18,700 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:14:18,700 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:14:18,701 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:14:18,701 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:14:18,701 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:14:18,718 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:14:18,718 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:14:18,720 INFO:  | 0.0s | master started running with PID 15.
+[yugabyted start] 2025-06-19 16:14:18,720 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:14:18,720 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:14:18,720 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:14:28,734 INFO:  | 10.0s | run_process: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters'] timeout expired for command: 
+[yugabyted start] 2025-06-19 16:14:29,239 ERROR:  | 10.5s | Failed waiting for yb-master... process died.
+[yugabyted start] 2025-06-19 16:14:29,242 ERROR:  | 10.6s | Failed to setup master. Exception: Traceback (most recent call last):
+  File "/home/yugabyte/bin/yugabyted", line 5968, in setup_master
+    master_uuids = retry_op_with_argument(self.get_master_uuids, master_addrs)
+  File "/home/yugabyte/bin/yugabyted", line 10913, in retry_op_with_argument
+    return func(argument)
+  File "/home/yugabyte/bin/yugabyted", line 4449, in get_master_uuids
+    raise RuntimeError("process died unexpectedly.")
+RuntimeError: process died unexpectedly.
+
+For more information, check the logs in /home/yugabyte/yb_data/logs
+[yugabyted start] 2025-06-19 16:14:29,243 INFO:  | 10.6s | Shutting down...
+[yugabyted start] 2025-06-19 16:14:29,754 INFO:  | 0.0s | Running yugabyted command: '/home/yugabyte/bin/yugabyted start --base_dir=/home/yugabyte/yb_data --background=false --advertise_address=0.0.0.0 --master_flags=rpc_bind_addresses=0.0.0.0:7100,master_ui_bind_address=0.0.0.0:7000 --tserver_flags=rpc_bind_addresses=0.0.0.0:9100,ysql_proxy_bind_address=0.0.0.0:5433,cql_proxy_bind_address=0.0.0.0:9042'
+[yugabyted start] 2025-06-19 16:14:29,754 INFO:  | 0.0s | cmd = start using config file: /home/yugabyte/yb_data/conf/yugabyted.conf
+[yugabyted start] 2025-06-19 16:14:29,754 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file openssl_proxy.sh
+[yugabyted start] 2025-06-19 16:14:29,754 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-admin
+[yugabyted start] 2025-06-19 16:14:29,754 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-ts-cli
+[yugabyted start] 2025-06-19 16:14:29,755 INFO:  | 0.0s | Found directory /home/yugabyte/postgres/bin for file pg_upgrade
+[yugabyted start] 2025-06-19 16:14:29,755 INFO:  | 0.0s | Starting first primary node. Using 54be6523-746f-45aa-b0b4-6c30154dc29d as placement_uuid
+[yugabyted start] 2025-06-19 16:14:29,755 INFO:  | 0.0s | Starting yugabyted...
+[yugabyted start] 2025-06-19 16:14:29,755 INFO:  | 0.0s | yugabyted started running with PID 7.
+[yugabyted start] 2025-06-19 16:14:29,756 INFO:  | 0.0s | Running in a Docker container. Skipping pre-requisite checks.
+[yugabyted start] 2025-06-19 16:14:29,756 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-master
+[yugabyted start] 2025-06-19 16:14:29,756 DEBUG:  | 0.0s | Value of saved_data - upgrade_in_progress. False
+[yugabyted start] 2025-06-19 16:14:29,756 DEBUG:  | 0.0s | Value of saved_data - catalog_upgrade_completed. False
+[yugabyted start] 2025-06-19 16:14:29,756 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file yb-tserver
+[yugabyted start] 2025-06-19 16:14:29,756 INFO:  | 0.0s | Found directory /home/yugabyte/bin for file post_install.sh
+[yugabyted start] 2025-06-19 16:14:29,756 INFO:  | 0.0s | Running the post-installation script /home/yugabyte/bin/post_install.sh (may be a no-op)
+[yugabyted start] 2025-06-19 16:14:29,772 INFO:  | 0.0s | Successfully ran the post-installation script.
+[yugabyted start] 2025-06-19 16:14:29,772 INFO:  | 0.0s | About to start master with cmd /home/yugabyte/bin/yb-master --rpc_bind_addresses=0.0.0.0:7100 --master_ui_bind_address=0.0.0.0:7000 --stop_on_parent_termination --undefok=stop_on_parent_termination --fs_data_dirs=/home/yugabyte/yb_data/data --webserver_interface=127.0.0.1 --metrics_snapshotter_tserver_metrics_whitelist=handler_latency_yb_tserver_TabletServerService_Read_count,handler_latency_yb_tserver_TabletServerService_Write_count,handler_latency_yb_tserver_TabletServerService_Read_sum,handler_latency_yb_tserver_TabletServerService_Write_sum,disk_usage,cpu_usage,node_up --yb_num_shards_per_tserver=1 --ysql_num_shards_per_tserver=1 --placement_cloud=cloud1 --placement_region=datacenter1 --placement_zone=rack1 --use_memory_defaults_optimized_for_ysql=true --rpc_bind_addresses=127.0.0.1:7100 --server_broadcast_addresses=127.0.0.1:7100 --replication_factor=1 --server_dump_info_path=/home/yugabyte/yb_data/data/master-info --master_enable_metrics_snapshotter=true --webserver_port=7000 --instance_uuid_override=7bee49190dc14430b082b29e46bedc2e --enforce_tablet_replica_limits=true --split_respects_tablet_replica_limits=true --master_addresses=127.0.0.1:7100 --cluster_uuid=9257066a-dfef-4b0d-b6a8-f75c644fe0f1
+[yugabyted start] 2025-06-19 16:14:29,774 INFO:  | 0.0s | master started running with PID 16.
+[yugabyted start] 2025-06-19 16:14:29,774 ERROR:  | 0.0s | Failed to create symlink from /home/yugabyte/yb_data/data/yb-data/master/logs to /home/yugabyte/yb_data/logs/master
+[yugabyted start] 2025-06-19 16:14:29,774 INFO:  | 0.0s | Waiting for master
+[yugabyted start] 2025-06-19 16:14:29,774 INFO:  | 0.0s | run_process: cmd: ['/home/yugabyte/bin/yb-admin', '--master_addresses', '127.0.0.1:7100', 'list_all_masters']
+[yugabyted start] 2025-06-19 16:14:32,594 DEBUG:  | 2.8s | Received signal: 15
+[yugabyted start] 2025-06-19 16:14:32,595 INFO:  | 2.8s | Shutting down...

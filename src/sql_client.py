@@ -18,8 +18,7 @@ class SQLClient:
         self.conn.autocommit = True
 
     def create_table(self):
-        sql = """
-        CREATE TABLE IF NOT EXISTS customers (
+        sql = """CREATE TABLE IF NOT EXISTS customers (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100),
             email VARCHAR(100),
